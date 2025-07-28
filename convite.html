@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Convite Especial para Gabriela 💌</title>
+  <style>
+    body {
+      background-color: #0f0f0f;
+      color: #00ffcc;
+      font-family: 'Courier New', Courier, monospace;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      transition: background 1s ease, color 1s ease;
+    }
+    .floating {
+      position: absolute;
+      animation: float 5s infinite linear;
+      font-size: 2rem;
+      opacity: 0.3;
+    }
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.4;
+      }
+      100% {
+        transform: translateY(-120vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+    .terminal-box {
+      background-color: #1a1a1a;
+      border: 2px solid #00ffcc;
+      padding: 2rem;
+      border-radius: 12px;
+      max-width: 600px;
+      text-align: center;
+      box-shadow: 0 0 15px #00ffcc;
+      z-index: 2;
+      transition: transform 0.6s ease;
+    }
+    h1 {
+      font-size: 1.5rem;
+    }
+    .ascii {
+      font-size: 0.8rem;
+      color: #fff;
+      margin: 1rem 0;
+      animation: wiggle 2s infinite;
+    }
+    @keyframes wiggle {
+      0%, 100% { transform: translateX(0); }
+      25% { transform: translateX(-3px); }
+      50% { transform: translateX(3px); }
+      75% { transform: translateX(-1px); }
+    }
+    button {
+      margin: 1rem 1rem 0 1rem;
+      padding: 0.5rem 1.5rem;
+      font-size: 1rem;
+      font-family: 'Courier New', Courier, monospace;
+      color: #0f0f0f;
+      background-color: #00ffcc;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background 0.3s ease, transform 0.2s;
+    }
+    button:hover {
+      background-color: #00ccaa;
+      transform: scale(1.05);
+    }
+    #detalhes, #resposta, #convite {
+      margin-top: 20px;
+      white-space: pre-line;
+    }
+    #detalhes, #resposta, #painel-principal {
+      display: none;
+    }
+    #entrada {
+      display: block;
+    }
+    #endereco {
+      margin-top: 20px;
+      display: none;
+      color: #ccffee;
+    }
+    audio {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <script>
+    const emojis = ['🐥','🐶','💖','🎮','🧸','🌈','💌','🐾'];
+    for (let i = 0; i < 35; i++) {
+      const el = document.createElement('div');
+      el.className = 'floating';
+      el.style.left = Math.random() * 100 + '%';
+      el.style.animationDuration = (2 + Math.random() * 4) + 's';
+      el.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+      document.body.appendChild(el);
+    }
+  </script>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/14/audio_d9fa0e20e3.mp3?filename=romantic-vibes-144276.mp3" type="audio/mpeg">
+  </audio>
+
+  <div class="terminal-box" id="entrada">
+    <h1>🎵 Tocando: "Convite para Gabriela" 🎶</h1>
+    <p>Carregando convite mais fofo da sua semana...</p>
+    <button onclick="iniciarConvite()">Iniciar</button>
+  </div>
+
+  <div class="terminal-box" id="painel-principal">
+    <h1>✉️ Convite Especial para Gabriela 💖</h1>
+    <p>Atenção, agente Gabriela!</p>
+    <p>Missão: me acompanhar para um final de semana com <strong>sorvetes, pipocas, filmes aconchegantes</strong> 🍿🍨🎬</p>
+    <p>E com direito a cuidados especiais... 👩‍⚕️💅💖 (inclui enfermeira particular para pós-procedimento de beleza!)</p>
+
+    <div class="ascii">
+      <pre>
+     .--.
+    |o_o |
+    |:_/ |
+   //   \
+  (|     | )
+ /'\_   _/`\
+ \___)=(___/
+      </pre>
+      <p>Um convite fofo, nerd, com flertes e mimos 😏
+"Só não aceito um não... mas aceito você, Gabriela! 💻💕"
+"Convite mais confortável que moletom favorito!"
+"Confirme, e pipoca amanteigada será liberada."</p>
+    </div>
+
+    <button onclick="mostrarDetalhes()">Ver detalhes da missão 📋</button>
+    <div id="detalhes">
+      <p>🍨🍿 Fim de semana com:</p>
+      <ul style="text-align:left; max-width:400px; margin:auto;">
+        <li>Sessão de filmes (comédias românticas nerds)</li>
+        <li>Sorvetes e pipocas sem fim</li>
+        <li>Cuidados personalizados de uma enfermeira pós-beleza</li>
+      </ul>
+    </div>
+
+    <button onclick="responder(true)">Aceitar 💚</button>
+    <button onclick="responder(false)">Negar 💔</button>
+
+    <div id="resposta"></div>
+    <div id="endereco">
+      <p>📍 Endereço da base secreta:
+Rua Rubens Porta Nova, 166
+Apartamento 402, Bloco B
+
+🔐 Entrada já cadastrada! A senha da fechadura será enviada após o aceite 💌</p>
+    </div>
+  </div>
+
+  <script>
+    function iniciarConvite() {
+      document.getElementById('entrada').style.display = 'none';
+      document.getElementById('painel-principal').style.display = 'block';
+    }
+
+    function mostrarDetalhes() {
+      document.getElementById('detalhes').style.display = 'block';
+    }
+
+    function responder(aceitou) {
+      const resposta = document.getElementById('resposta');
+      const endereco = document.getElementById('endereco');
+
+      if (aceitou) {
+        resposta.innerHTML = 'Missão aceita! 💖 Gabriela, prepare o look comfy, o coração aberto e o controle remoto. Endereço liberado abaixo! 🚀';
+        endereco.style.display = 'block';
+      } else {
+        resposta.innerHTML = 'Missão abortada 😢 Espero poder te reconvocar para uma nova operação romântica em breve...';
+        endereco.style.display = 'none';
+      }
+    }
+  </script>
+</body>
+</html>
